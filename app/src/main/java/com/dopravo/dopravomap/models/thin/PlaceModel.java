@@ -16,6 +16,7 @@ public class PlaceModel {
     private LatLng position;
     private List<Long> branchesIds;
     private List<PlaceModel> branches;
+    private MarkerOptions markerOptions;
 
     public PlaceModel(long id) {
         this.id = id;
@@ -62,12 +63,18 @@ public class PlaceModel {
     }
 
     public MarkerOptions toMarkerOptions() {
-        MarkerOptions markerOptions = new MarkerOptions();
+        if (this.markerOptions == null)
+            this.markerOptions = new MarkerOptions();
+
+        updateMarker();
+
+        return this.markerOptions;
+    }
+
+    private void updateMarker() {
         markerOptions.title(name);
         markerOptions.position(position);
         markerOptions.snippet(description);
-
-        return markerOptions;
     }
 
     @Override

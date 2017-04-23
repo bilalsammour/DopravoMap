@@ -18,7 +18,7 @@ public class MapMarkersDrawer {
     private static final float ZOOMING = 14.0f;
 
     private GoogleMap googleMap;
-    private HashMap<MarkerOptions, PlaceModel> markerPlaceHashMap;
+    private HashMap<Marker, PlaceModel> markerPlaceHashMap;
 
     public MapMarkersDrawer(GoogleMap googleMap) {
         this.googleMap = googleMap;
@@ -39,24 +39,20 @@ public class MapMarkersDrawer {
 
     private void addPlacesList(List<PlaceModel> placesList) {
         for (PlaceModel placeModel : placesList) {
-            pairMarkerWithPlace(placeModel);
+            MarkerOptions markerOptions = placeModel.toMarkerOptions();
 
-            addPlace(placeModel);
+            Marker marker = addPlaceMarker(markerOptions);
+
+            pairMarkerWithPlace(marker, placeModel);
         }
     }
 
-    private void pairMarkerWithPlace(PlaceModel placeModel) {
-        markerPlaceHashMap.put(placeModel.toMarkerOptions(), placeModel);
+    private void pairMarkerWithPlace(Marker marker, PlaceModel placeModel) {
+        markerPlaceHashMap.put(marker, placeModel);
     }
 
-    private void addPlace(PlaceModel placeModel) {
-        MarkerOptions markerOptions = placeModel.toMarkerOptions();
-
-        addPlaceMarker(markerOptions);
-    }
-
-    private void addPlaceMarker(MarkerOptions markerOptions) {
-        googleMap.addMarker(markerOptions);
+    private Marker addPlaceMarker(MarkerOptions markerOptions) {
+        return googleMap.addMarker(markerOptions);
     }
 
     private void moveToFirstPlace(List<PlaceModel> placesList) {
@@ -81,7 +77,7 @@ public class MapMarkersDrawer {
         return CameraUpdateFactory.newCameraPosition(cameraPosition);
     }
 
-    private void showMarkerInfo(Marker marker) {
-
+    public PlaceModel getPlaceByMarker(Marker marker) {
+        return markerPlaceHashMap.get(marker);
     }
 }

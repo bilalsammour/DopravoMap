@@ -60,7 +60,9 @@ public class StoresMapFragment extends SupportMapFragment
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                // showMarkerInfo(marker);
+                marker.showInfoWindow();
+
+                PlaceModel placeModel = mapMarkersDrawer.getPlaceByMarker(marker);
 
                 return true;
             }
