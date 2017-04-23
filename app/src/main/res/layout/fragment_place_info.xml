@@ -1,22 +1,25 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/place_info_background"
+    android:visibility="gone"
     tools:context="com.dopravo.dopravomap.fragments.PlaceInfoFragment">
 
     <ImageView
         android:id="@+id/infoImage"
         android:layout_width="@dimen/info_image_width_height"
         android:layout_height="@dimen/info_image_width_height"
-        android:contentDescription="@string/app_name"
-        android:src="@mipmap/ic_launcher_round" />
+        android:contentDescription="@string/app_name" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="title"
+        android:layout_marginLeft="@dimen/one_unit"
+        android:layout_marginStart="@dimen/one_unit"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintStart_toEndOf="@id/infoImage" />
 
@@ -24,7 +27,8 @@
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="description"
+        android:layout_marginLeft="@dimen/one_unit"
+        android:layout_marginStart="@dimen/one_unit"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toEndOf="@id/infoImage"
         app:layout_constraintTop_toBottomOf="@+id/title" />

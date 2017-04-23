@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.dopravo.dopravomap.R;
+import com.dopravo.dopravomap.events.OnMapPlaceChosenListener;
 import com.dopravo.dopravomap.events.OnMapReadyListener;
 import com.dopravo.dopravomap.events.OnPlacesReadyListener;
 import com.dopravo.dopravomap.models.PlacesLoader;
 import com.dopravo.dopravomap.models.thin.PlaceModel;
 import com.dopravo.dopravomap.protocols.IMapProtocol;
+import com.dopravo.dopravomap.protocols.IPlaceInfoProtocol;
 import com.dopravo.dopravomap.protocols.IPlacesLoaderProtocol;
 
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity {
 
     private IMapProtocol map;
+    private IPlaceInfoProtocol placeInfo;
+
     private IPlacesLoaderProtocol placesLoader;
 
     @Override
@@ -31,6 +35,20 @@ public class MapsActivity extends FragmentActivity {
                 retrievePlacesList();
             }
         });
+        map.setOnMapPlaceChosenListener(new OnMapPlaceChosenListener() {
+            @Override
+            public void onMapPlaceChosen(PlaceModel placeModel) {
+                showPlaceInfo(placeModel);
+            }
+
+            @Override
+            public void onMapPlaceChooseNothing() {
+                hidePlaceInfoPanel();
+            }
+        });
+
+        placeInfo = (IPlaceInfoProtocol) getSupportFragmentManager()
+                .findFragmentById(R.id.placeInfo);
 
         placesLoader = new PlacesLoader(this);
         placesLoader.setOnPlacesReadyListener(new OnPlacesReadyListener() {
@@ -49,5 +67,13 @@ public class MapsActivity extends FragmentActivity {
         map.setPlacesList(placesList);
 
         map.drawPlaces();
+    }
+
+    private void showPlaceInfo(PlaceModel placeModel) {
+        placeInfo.showPlaceInfo(placeModel);
+    }
+
+    private void hidePlaceInfoPanel() {
+        placeInfo.hidePlaceInfoPanel();
     }
 }

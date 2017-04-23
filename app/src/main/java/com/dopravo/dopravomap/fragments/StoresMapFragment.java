@@ -3,6 +3,7 @@ package com.dopravo.dopravomap.fragments;
 
 import android.os.Bundle;
 
+import com.dopravo.dopravomap.events.OnMapPlaceChosenListener;
 import com.dopravo.dopravomap.events.OnMapReadyListener;
 import com.dopravo.dopravomap.helpers.MapMarkersDrawer;
 import com.dopravo.dopravomap.models.thin.PlaceModel;
@@ -10,6 +11,7 @@ import com.dopravo.dopravomap.protocols.IMapProtocol;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 import java.util.List;
@@ -17,13 +19,11 @@ import java.util.List;
 public class StoresMapFragment extends SupportMapFragment
         implements IMapProtocol {
 
-    private static final float ZOOMING = 14.0f;
-
     private MapMarkersDrawer mapMarkersDrawer;
-    private GoogleMap googleMap;
     private List<PlaceModel> placesList;
 
     private OnMapReadyListener onMapReadyListener;
+    private OnMapPlaceChosenListener onMapPlaceChosenListener;
 
 
     public StoresMapFragment() {
@@ -50,12 +50,17 @@ public class StoresMapFragment extends SupportMapFragment
     }
 
     private void initGoogleMap(GoogleMap googleMap) {
-        this.googleMap = googleMap;
-
         mapMarkersDrawer = new MapMarkersDrawer(googleMap);
 
         googleMap.getUiSettings().setCompassEnabled(true);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
+
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                onMapPlaceChooseNothing();
+            }
+        });
 
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -63,6 +68,8 @@ public class StoresMapFragment extends SupportMapFragment
                 marker.showInfoWindow();
 
                 PlaceModel placeModel = mapMarkersDrawer.getPlaceByMarker(marker);
+
+                onPlaceModelClicked(placeModel);
 
                 return true;
             }
@@ -82,5 +89,19 @@ public class StoresMapFragment extends SupportMapFragment
     @Override
     public void drawPlaces() {
         mapMarkersDrawer.drawPlaces(placesList);
+    }
+
+    public void setOnMapPlaceChosenListener(OnMapPlaceChosenListener onMapPlaceChosenListener) {
+        this.onMapPlaceChosenListener = onMapPlaceChosenListener;
+    }
+
+    private void onPlaceModelClicked(PlaceModel placeModel) {
+        if (onMapPlaceChosenListener != null)
+            onMapPlaceChosenListener.onMapPlaceChosen(placeModel);
+    }
+
+    private void onMapPlaceChooseNothing() {
+        if (onMapPlaceChosenListener != null)
+            onMapPlaceChosenListener.onMapPlaceChooseNothing();
     }
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import com.dopravo.dopravomap.events.OnPlacesReadyListener;
 import com.dopravo.dopravomap.models.thin.PlaceModel;
 import com.dopravo.dopravomap.models.thin.PlacesListContainerModel;
+import com.dopravo.dopravomap.protocols.IAssetsConstants;
 import com.dopravo.dopravomap.protocols.IPlacesLoaderProtocol;
 import com.dopravo.dopravomap.utils.AssetsFileManager;
 import com.dopravo.dopravomap.utils.JsonParser;
@@ -13,9 +14,7 @@ import com.dopravo.dopravomap.utils.JsonParser;
 import java.io.IOException;
 import java.util.List;
 
-public class PlacesLoader implements IPlacesLoaderProtocol {
-
-    private static final String FILE_NAME = "stores/stores.json";
+public class PlacesLoader implements IAssetsConstants, IPlacesLoaderProtocol {
 
     private Context context;
     private OnPlacesReadyListener onPlacesReadyListener;
@@ -39,7 +38,7 @@ public class PlacesLoader implements IPlacesLoaderProtocol {
     }
 
     private PlacesListContainerModel retrievePlacesFromFile() throws IOException {
-        String source = AssetsFileManager.readFile(context, FILE_NAME);
+        String source = AssetsFileManager.readFile(context, STORES_DATA_FILE_NAME);
 
         return parsePlacesText(source);
     }
