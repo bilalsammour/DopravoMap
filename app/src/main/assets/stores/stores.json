@@ -1,0 +1,81 @@
+[
+  {
+    "id": 1,
+    "name": "City Mall",
+    "description": "The best mall in Jordan",
+    "image": "citymall.jpg",
+    "position": {
+      "latitude": 31.9806203,
+      "longitude": 35.8368819
+    },
+    "branches": []
+  },
+  {
+    "id": 2,
+    "name": "Sameh Mall",
+    "description": "Main",
+    "image": "samehmall_main.jpg",
+    "position": {
+      "latitude": 32.0219081,
+      "longitude": 35.8439308
+    },
+    "branches": [
+      3,
+      4
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Sameh Mall - Wasfi At-Tall",
+    "description": "Wasfi At-Tall Street",
+    "image": "samehmall_wasfi.jpg",
+    "position": {
+      "latitude": 31.9851149,
+      "longitude": 35.8824554
+    },
+    "branches": [
+      2,
+      4
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Sameh Mall - Ras Al Ain",
+    "description": "Ras Al Ain",
+    "image": "samehmall_rasalain.jpg",
+    "position": {
+      "latitude": 31.926055,
+      "longitude": 35.9093443
+    },
+    "branches": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Abu Shakra - Main",
+    "description": "Main",
+    "image": "abushakra_main.jpg",
+    "position": {
+      "latitude": 35.838608,
+      "longitude": 35.838608
+    },
+    "branches": [
+      6
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Abu Shakra - Eweifieh",
+    "description": "Eweifieh",
+    "image": "abushakra_eweifieh.jpg",
+    "position": {
+      "latitude": 31.9569878,
+      "longitude": 35.8672291
+    },
+    "branches": [
+      5
+    ]
+  }
+]
