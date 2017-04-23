@@ -4,6 +4,7 @@ package com.dopravo.dopravomap.models.thin;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceModel {
@@ -13,7 +14,12 @@ public class PlaceModel {
     private String description;
     private String image;
     private LatLng position;
-    private List<Long> branches;
+    private List<Long> branchesIds;
+    private List<PlaceModel> branches;
+
+    public PlaceModel(long id) {
+        this.id = id;
+    }
 
     public long getId() {
         return id;
@@ -35,8 +41,24 @@ public class PlaceModel {
         return position;
     }
 
-    public List<Long> getBranches() {
+    public List<Long> getBranchesIds() {
+        return branchesIds;
+    }
+
+    public List<PlaceModel> getBranches() {
         return branches;
+    }
+
+    public boolean canAddBranches() {
+        return (branchesIds != null && !branchesIds.isEmpty());
+    }
+
+    public void initBranches() {
+        branches = new ArrayList<>();
+    }
+
+    public void addBranch(PlaceModel branch) {
+        branches.add(branch);
     }
 
     public MarkerOptions toMarkerOptions() {

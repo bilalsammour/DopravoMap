@@ -32,7 +32,7 @@ public class MapsActivity extends FragmentActivity {
             }
         });
 
-        placesLoader = new PlacesLoader();
+        placesLoader = new PlacesLoader(this);
         placesLoader.setOnPlacesReadyListener(new OnPlacesReadyListener() {
             @Override
             public void onPlacesReady(List<PlaceModel> placesList) {
