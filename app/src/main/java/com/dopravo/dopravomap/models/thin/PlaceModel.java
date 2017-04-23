@@ -8,63 +8,35 @@ import java.util.List;
 
 public class PlaceModel {
 
+    private long id;
     private String name;
     private String description;
-    private String addressText;
     private String image;
     private LatLng position;
-    private List<PlaceModel> branches;
+    private List<Long> branches;
+
+    public long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getAddressText() {
-        return addressText;
-    }
-
-    public void setAddressText(String addressText) {
-        this.addressText = addressText;
-    }
-
     public String getImage() {
         return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public List<PlaceModel> getBranches() {
-        return branches;
-    }
-
-    public void setBranches(List<PlaceModel> branches) {
-        this.branches = branches;
     }
 
     public LatLng getPosition() {
         return position;
     }
 
-    public void setPosition(LatLng position) {
-        this.position = position;
-    }
-
-    public void setLocation(double latitude, double longitude) {
-        setPosition(new LatLng(latitude, longitude));
+    public List<Long> getBranches() {
+        return branches;
     }
 
     public MarkerOptions toMarkerOptions() {
@@ -73,5 +45,21 @@ public class PlaceModel {
         markerOptions.position(position);
 
         return markerOptions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PlaceModel that = (PlaceModel) o;
+
+        return id == that.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
     }
 }
