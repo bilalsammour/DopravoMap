@@ -65,6 +65,7 @@ public class PlaceModel {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.title(name);
         markerOptions.position(position);
+        markerOptions.snippet(description);
 
         return markerOptions;
     }
