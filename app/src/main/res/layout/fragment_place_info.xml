@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/place_info_background"
+    android:padding="@dimen/one_unit"
     android:visibility="gone"
     tools:context="com.dopravo.dopravomap.fragments.PlaceInfoFragment">
 
@@ -12,11 +13,12 @@
         android:id="@+id/infoImage"
         android:layout_width="@dimen/info_image_width_height"
         android:layout_height="@dimen/info_image_width_height"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/one_unit"
         android:layout_marginStart="@dimen/one_unit"
@@ -25,12 +27,35 @@
 
     <TextView
         android:id="@+id/description"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/one_unit"
-        android:layout_marginStart="@dimen/one_unit"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintStart_toEndOf="@id/infoImage"
+        app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <LinearLayout
+        android:id="@+id/branchesPanel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/one_unit"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoImage">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="@string/other_branches"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/branchesList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -50,6 +50,10 @@ public class PlaceModel {
         return branches;
     }
 
+    public boolean hasBranches() {
+        return (branches != null && !branches.isEmpty());
+    }
+
     public boolean canAddBranches() {
         return (branchesIds != null && !branchesIds.isEmpty());
     }

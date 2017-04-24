@@ -6,13 +6,19 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dopravo.dopravomap.R;
+import com.dopravo.dopravomap.adapters.BranchesAdapter;
 import com.dopravo.dopravomap.models.thin.PlaceModel;
 import com.dopravo.dopravomap.protocols.IAssetsConstants;
 import com.dopravo.dopravomap.protocols.IPlaceInfoProtocol;
@@ -27,6 +33,10 @@ public class PlaceInfoFragment extends Fragment
     private ImageView infoImage;
     private TextView title;
     private TextView description;
+    private View branchesPanel;
+    private RecyclerView branchesList;
+
+    private BranchesAdapter branchesAdapter;
 
     public PlaceInfoFragment() {
         // Required empty public constructor
@@ -39,6 +49,8 @@ public class PlaceInfoFragment extends Fragment
 
         initViews(rootView);
 
+        initBranchesList();
+
         return rootView;
     }
 
@@ -47,6 +59,23 @@ public class PlaceInfoFragment extends Fragment
         infoImage = (ImageView) rootView.findViewById(R.id.infoImage);
         title = (TextView) rootView.findViewById(R.id.title);
         description = (TextView) rootView.findViewById(R.id.description);
+
+        branchesPanel = rootView.findViewById(R.id.branchesPanel);
+        branchesList = (RecyclerView) rootView.findViewById(R.id.branchesList);
+    }
+
+    private void initBranchesList() {
+        branchesAdapter = new BranchesAdapter();
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        branchesList.setLayoutManager(layoutManager);
+
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(getContext(), LinearLayout.VERTICAL);
+        branchesList.addItemDecoration(dividerItemDecoration);
+
+        branchesList.setItemAnimator(new DefaultItemAnimator());
+        branchesList.setAdapter(branchesAdapter);
     }
 
     @Override
@@ -58,6 +87,8 @@ public class PlaceInfoFragment extends Fragment
         description.setText(placeModel.getDescription());
 
         showPlaceInfoPanel();
+
+        showBranches(placeModel);
     }
 
     @Override
@@ -86,10 +117,22 @@ public class PlaceInfoFragment extends Fragment
         InputStream inputStream = null;
         try {
             inputStream = assetManager.open(fileName);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return BitmapFactory.decodeStream(inputStream);
+    }
+
+    private void showBranches(PlaceModel placeModel) {
+        if (placeModel.hasBranches()) {
+            branchesPanel.setVisibility(View.VISIBLE);
+
+            branchesAdapter.setBranches(placeModel.getBranches());
+
+        } else {
+            branchesPanel.setVisibility(View.GONE);
+        }
     }
 }
