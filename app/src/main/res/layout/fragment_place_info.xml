@@ -7,7 +7,8 @@
     android:background="@color/place_info_background"
     android:padding="@dimen/one_unit"
     android:visibility="gone"
-    tools:context="com.dopravo.dopravomap.fragments.PlaceInfoFragment">
+    tools:context="com.dopravo.dopravomap.fragments.PlaceInfoFragment"
+    tools:ignore="Overdraw">
 
     <ImageView
         android:id="@+id/infoImage"

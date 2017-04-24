@@ -6,6 +6,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class PlacesListContainerModel {
 
+    @SuppressWarnings("CanBeFinal")
     private List<PlaceModel> list;
 
     public List<PlaceModel> getList() {
