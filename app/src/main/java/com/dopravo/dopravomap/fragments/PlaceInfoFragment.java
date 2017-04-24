@@ -116,6 +116,12 @@ public class PlaceInfoFragment extends Fragment
         this.onBranchChosenListener = onBranchChosenListener;
     }
 
+    @Override
+    public boolean isPlaceInfoVisible() {
+        return (parent.getVisibility() == View.VISIBLE
+                && parent.getAlpha() == 1f);
+    }
+
     private void showPlaceImage(PlaceModel placeModel) {
         String fullName = getFullImageName(placeModel.getImage());
         Bitmap bitmap = getBitmapFromAssets(fullName);

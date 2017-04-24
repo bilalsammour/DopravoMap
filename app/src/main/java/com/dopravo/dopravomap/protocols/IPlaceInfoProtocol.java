@@ -11,4 +11,6 @@ public interface IPlaceInfoProtocol {
     void hidePlaceInfoPanel();
 
     void setOnBranchChosenListener(OnBranchChosenListener onBranchChosenListener);
+
+    boolean isPlaceInfoVisible();
 }

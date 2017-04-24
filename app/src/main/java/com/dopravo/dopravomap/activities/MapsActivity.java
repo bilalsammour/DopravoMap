@@ -66,6 +66,14 @@ public class MapsActivity extends FragmentActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        if (placeInfo.isPlaceInfoVisible())
+            placeInfo.hidePlaceInfoPanel();
+        else
+            super.onBackPressed();
+    }
+
     private void retrievePlacesList() {
         placesLoader.retrievePlaces();
     }
