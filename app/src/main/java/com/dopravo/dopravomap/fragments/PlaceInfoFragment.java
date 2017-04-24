@@ -30,6 +30,8 @@ import java.io.InputStream;
 public class PlaceInfoFragment extends Fragment
         implements IAssetsConstants, IPlaceInfoProtocol {
 
+    private static final long VISIBILITY_ANIMATION_DURATION = 200;
+
     private View parent;
     private ImageView infoImage;
     private TextView title;
@@ -100,18 +102,18 @@ public class PlaceInfoFragment extends Fragment
         showBranches(placeModel);
     }
 
+    private void showPlaceInfoPanel() {
+        parent.animate().setDuration(VISIBILITY_ANIMATION_DURATION).alpha(1f);
+    }
+
     @Override
     public void hidePlaceInfoPanel() {
-        parent.setVisibility(View.GONE);
+        parent.animate().setDuration(VISIBILITY_ANIMATION_DURATION).alpha(0);
     }
 
     @Override
     public void setOnBranchChosenListener(OnBranchChosenListener onBranchChosenListener) {
         this.onBranchChosenListener = onBranchChosenListener;
-    }
-
-    private void showPlaceInfoPanel() {
-        parent.setVisibility(View.VISIBLE);
     }
 
     private void showPlaceImage(PlaceModel placeModel) {
