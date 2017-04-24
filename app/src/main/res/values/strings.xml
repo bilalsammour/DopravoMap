@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">DopravoMap</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="app_name">Dopravo Map</string>
     <string name="other_branches">Other Branches</string>
 </resources>
