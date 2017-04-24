@@ -51,8 +51,8 @@ public class BranchesAdapter extends
 
     class BranchViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView title;
-        private TextView description;
+        private final TextView title;
+        private final TextView description;
 
         BranchViewHolder(View itemView) {
             super(itemView);
@@ -61,11 +61,11 @@ public class BranchesAdapter extends
             description = (TextView) itemView.findViewById(R.id.description);
         }
 
-        public TextView getTitle() {
+        private TextView getTitle() {
             return title;
         }
 
-        public TextView getDescription() {
+        private TextView getDescription() {
             return description;
         }
     }

@@ -17,8 +17,8 @@ public class MapMarkersDrawer {
 
     private static final float ZOOMING = 14.0f;
 
-    private GoogleMap googleMap;
-    private HashMap<Marker, PlaceModel> markerPlaceHashMap;
+    private final GoogleMap googleMap;
+    private final HashMap<Marker, PlaceModel> markerPlaceHashMap;
 
     public MapMarkersDrawer(GoogleMap googleMap) {
         this.googleMap = googleMap;

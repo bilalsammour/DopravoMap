@@ -16,7 +16,7 @@ import java.util.List;
 
 public class PlacesLoader implements IAssetsConstants, IPlacesLoaderProtocol {
 
-    private Context context;
+    private final Context context;
     private OnPlacesReadyListener onPlacesReadyListener;
 
     public PlacesLoader(Context context) {

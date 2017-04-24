@@ -3,7 +3,7 @@ package com.dopravo.dopravomap.utils;
 
 import android.util.Log;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class LLog {
 
     private static final String TAG = "LLog";

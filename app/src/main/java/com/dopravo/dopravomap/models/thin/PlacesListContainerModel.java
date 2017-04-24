@@ -3,6 +3,7 @@ package com.dopravo.dopravomap.models.thin;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class PlacesListContainerModel {
 
     private List<PlaceModel> list;

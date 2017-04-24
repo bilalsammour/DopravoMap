@@ -7,6 +7,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"WeakerAccess", "CanBeFinal", "unused"})
 public class PlaceModel {
 
     private long id;
@@ -76,9 +77,9 @@ public class PlaceModel {
     }
 
     private void updateMarker() {
-        markerOptions.title(name);
-        markerOptions.position(position);
-        markerOptions.snippet(description);
+        markerOptions.title(getName());
+        markerOptions.snippet(getDescription());
+        markerOptions.position(getPosition());
     }
 
     @Override
