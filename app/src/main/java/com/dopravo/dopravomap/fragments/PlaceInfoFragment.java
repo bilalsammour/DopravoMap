@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.dopravo.dopravomap.R;
 import com.dopravo.dopravomap.adapters.BranchesAdapter;
+import com.dopravo.dopravomap.events.OnBranchChosenListener;
 import com.dopravo.dopravomap.models.thin.PlaceModel;
 import com.dopravo.dopravomap.protocols.IAssetsConstants;
 import com.dopravo.dopravomap.protocols.IPlaceInfoProtocol;
@@ -37,6 +38,8 @@ public class PlaceInfoFragment extends Fragment
     private RecyclerView branchesList;
 
     private BranchesAdapter branchesAdapter;
+
+    private OnBranchChosenListener onBranchChosenListener;
 
     public PlaceInfoFragment() {
         // Required empty public constructor
@@ -66,6 +69,12 @@ public class PlaceInfoFragment extends Fragment
 
     private void initBranchesList() {
         branchesAdapter = new BranchesAdapter();
+        branchesAdapter.setOnBranchChosenListener(new OnBranchChosenListener() {
+            @Override
+            public void onBranchChosen(PlaceModel branch) {
+                sendChosenBranch(branch);
+            }
+        });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         branchesList.setLayoutManager(layoutManager);
@@ -94,6 +103,11 @@ public class PlaceInfoFragment extends Fragment
     @Override
     public void hidePlaceInfoPanel() {
         parent.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setOnBranchChosenListener(OnBranchChosenListener onBranchChosenListener) {
+        this.onBranchChosenListener = onBranchChosenListener;
     }
 
     private void showPlaceInfoPanel() {
@@ -134,5 +148,10 @@ public class PlaceInfoFragment extends Fragment
         } else {
             branchesPanel.setVisibility(View.GONE);
         }
+    }
+
+    private void sendChosenBranch(PlaceModel branch) {
+        if (onBranchChosenListener != null)
+            onBranchChosenListener.onBranchChosen(branch);
     }
 }

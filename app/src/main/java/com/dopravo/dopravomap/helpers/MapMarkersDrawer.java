@@ -33,6 +33,10 @@ public class MapMarkersDrawer {
         }
     }
 
+    public void moveToPlace(PlaceModel placeModel) {
+        moveToMarker(placeModel.toMarkerOptions());
+    }
+
     private boolean hasPlaces(List<PlaceModel> placesList) {
         return placesList != null && !placesList.isEmpty();
     }
@@ -58,7 +62,7 @@ public class MapMarkersDrawer {
     private void moveToFirstPlace(List<PlaceModel> placesList) {
         PlaceModel firstPlace = placesList.get(0);
 
-        moveToMarker(firstPlace.toMarkerOptions());
+        moveToPlace(firstPlace);
     }
 
     private void moveToMarker(MarkerOptions markerOptions) {

@@ -16,4 +16,6 @@ public interface IMapProtocol {
     void setOnMapPlaceChosenListener(OnMapPlaceChosenListener onMapPlaceChosenListener);
 
     void drawPlaces();
+
+    void goToBranch(PlaceModel branch);
 }

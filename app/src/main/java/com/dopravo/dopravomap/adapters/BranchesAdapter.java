@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dopravo.dopravomap.R;
+import com.dopravo.dopravomap.events.OnBranchChosenListener;
 import com.dopravo.dopravomap.models.thin.PlaceModel;
 
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ public class BranchesAdapter extends
         RecyclerView.Adapter<BranchesAdapter.BranchViewHolder> {
 
     private List<PlaceModel> branches;
+
+    private OnBranchChosenListener onBranchChosenListener;
 
     public BranchesAdapter() {
         this.branches = new ArrayList<>();
@@ -49,6 +52,10 @@ public class BranchesAdapter extends
         notifyDataSetChanged();
     }
 
+    public void setOnBranchChosenListener(OnBranchChosenListener onBranchChosenListener) {
+        this.onBranchChosenListener = onBranchChosenListener;
+    }
+
     class BranchViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView title;
@@ -59,6 +66,21 @@ public class BranchesAdapter extends
 
             title = (TextView) itemView.findViewById(R.id.title);
             description = (TextView) itemView.findViewById(R.id.description);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBranchClicked();
+                }
+            });
+        }
+
+        private void onBranchClicked() {
+            int position = getAdapterPosition();
+            PlaceModel currentItem = branches.get(position);
+
+            if (onBranchChosenListener != null)
+                onBranchChosenListener.onBranchChosen(currentItem);
         }
 
         private TextView getTitle() {

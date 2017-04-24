@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.dopravo.dopravomap.R;
+import com.dopravo.dopravomap.events.OnBranchChosenListener;
 import com.dopravo.dopravomap.events.OnMapPlaceChosenListener;
 import com.dopravo.dopravomap.events.OnMapReadyListener;
 import com.dopravo.dopravomap.events.OnPlacesReadyListener;
@@ -49,6 +50,12 @@ public class MapsActivity extends FragmentActivity {
 
         placeInfo = (IPlaceInfoProtocol) getSupportFragmentManager()
                 .findFragmentById(R.id.placeInfo);
+        placeInfo.setOnBranchChosenListener(new OnBranchChosenListener() {
+            @Override
+            public void onBranchChosen(PlaceModel branch) {
+                goToBranch(branch);
+            }
+        });
 
         placesLoader = new PlacesLoader(this);
         placesLoader.setOnPlacesReadyListener(new OnPlacesReadyListener() {
@@ -75,5 +82,9 @@ public class MapsActivity extends FragmentActivity {
 
     private void hidePlaceInfoPanel() {
         placeInfo.hidePlaceInfoPanel();
+    }
+
+    private void goToBranch(PlaceModel branch) {
+        map.goToBranch(branch);
     }
 }

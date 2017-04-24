@@ -91,6 +91,11 @@ public class StoresMapFragment extends SupportMapFragment
         mapMarkersDrawer.drawPlaces(placesList);
     }
 
+    @Override
+    public void goToBranch(PlaceModel branch) {
+        mapMarkersDrawer.moveToPlace(branch);
+    }
+
     public void setOnMapPlaceChosenListener(OnMapPlaceChosenListener onMapPlaceChosenListener) {
         this.onMapPlaceChosenListener = onMapPlaceChosenListener;
     }
